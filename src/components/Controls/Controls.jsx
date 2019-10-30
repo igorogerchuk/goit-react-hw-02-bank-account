@@ -1,8 +1,13 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
+
+const TransactionType = {
+  DEPOSIT: 'deposit',
+  WITHDRAW: 'withdraw',
+};
 
 export default class Controls extends Component {
   state = {
-    amount: ""
+    amount: '',
   };
 
   handleInput = e => {
@@ -10,13 +15,13 @@ export default class Controls extends Component {
   };
 
   handleDepositButton = () => {
-    this.props.onDeposit(this.state.amount);
-    this.setState({ amount: "" });
+    this.props.handleClick(this.state.amount, TransactionType.DEPOSIT);
+    this.setState({ amount: '' });
   };
 
   handleWithdrawButton = () => {
-    this.props.onWithdraw(this.state.amount);
-    this.setState({ amount: "" });
+    this.props.onWithdraw(this.state.amount, TransactionType.WITHDRAW);
+    this.setState({ amount: '' });
   };
 
   render() {

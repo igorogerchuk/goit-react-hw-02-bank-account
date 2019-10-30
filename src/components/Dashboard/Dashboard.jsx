@@ -1,46 +1,48 @@
-import React, { Component } from "react";
-import styles from "./Dashboard.module.css";
-import Controls from "../Controls";
+import React, { Component } from 'react';
+import styles from './Dashboard.module.css';
+import Controls from '../Controls';
+const uuidv4 = require('uuid/v4');
 
 export default class Dashboard extends Component {
   state = {
     transactions: [],
-    balance: 0
+    balance: 0,
   };
 
-  handleDeposit = amount => {
+  addTransaction = (amount, type) => {
     const transaction = {
-      id: 1,
-      type: "deposit",
+      id: uuidv4(),
+      type,
       amount,
-      date: new Date().toLocaleString()
+      date: new Date().toLocaleString(),
     };
 
     this.setState(state => ({
-      transactions: [...state.transactions, transaction]
+      transactions: [...state.transactions, transaction],
     }));
   };
 
-  handleWithdraw = amount => {
-    const transaction = {
-      id: 2,
-      type: "withdraw",
-      amount,
-      date: new Date().toLocaleString()
-    };
+  // handleWithdraw = amount => {
+  //   const transaction = {
+  //     id: 2,
+  //     type: 'withdraw',
+  //     amount,
+  //     date: new Date().toLocaleString(),
+  //   };
 
-    this.setState(state => ({
-      transactions: [...state.transactions, transaction]
-    }));
-  };
+  //   this.setState(state => ({
+  //     transactions: [...state.transactions, transaction],
+  //   }));
+  // };
 
   render() {
     return (
       <div class="dashboard">
         {/* <!-- Разметка компонента <Controls> --> */}
         <Controls
-          onDeposit={this.handleDeposit}
-          onWithdraw={this.handleWithdraw}
+          handleClick={this.addTransaction}
+          // onDeposit={this.handleDeposit}
+          // onWithdraw={this.handleWithdraw}
         />
         {/* <!-- Разметка компонента <Balance> --> */}
         <section class="balance">
