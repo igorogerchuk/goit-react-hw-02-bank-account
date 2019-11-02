@@ -1,7 +1,10 @@
 import React, { Component } from "react";
-import styles from "./Dashboard.module.css";
 import Controls from "../Controls";
 import { toast } from "react-toastify";
+import Balance from "../Balance";
+import TransactionHistory from "../TransactionHistory";
+import styles from "./Dashboard.module.css";
+
 const uuidv4 = require("uuid/v4");
 
 const TransactionType = {
@@ -47,8 +50,8 @@ export default class Dashboard extends Component {
     }));
   };
 
-  count = () => {
-    const sums = this.state.transactions.reduce(
+  countCirculation = () => {
+    const circulation = this.state.transactions.reduce(
       (acc, transaction) => {
         return {
           ...acc,
@@ -60,47 +63,22 @@ export default class Dashboard extends Component {
         withdraw: 0
       }
     );
-    console.log(sums);
-    return sums;
+    return circulation;
   };
 
   render() {
     return (
-      <div class="dashboard">
-        {/* <!-- Разметка компонента <Controls> --> */}
+      <div className={styles.dashboard}>
         <Controls
           onDeposit={this.handleDeposit}
           onWithdraw={this.handleWithdraw}
         />
-        {/* <!-- Разметка компонента <Balance> --> */}
-        <section class="balance">
-          <span>⬆️{this.count().deposit}$</span>
-          <span>⬇️{this.count().withdraw}$</span>
-          <span>Balance: {this.state.balance}$</span>
-        </section>
 
-        {/* <!-- Разметка компонента <TransactionHistory> --> */}
-        <table class="history">
-          <thead>
-            <tr>
-              <th>Transaction</th>
-              <th>Amount</th>
-              <th>Date</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Deposit</td>
-              <td>200$</td>
-              <td>4/17/2019, 12:45:17</td>
-            </tr>
-            <tr>
-              <td>Withdrawal</td>
-              <td>100$</td>
-              <td>4/18/2019, 14:15:23</td>
-            </tr>
-          </tbody>
-        </table>
+        <Balance
+          countCirculation={this.countCirculation}
+          balance={this.state.balance}
+        />
+        <TransactionHistory items={this.state.transactions} />
       </div>
     );
   }

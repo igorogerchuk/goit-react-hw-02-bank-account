@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import styles from "./Controls.module.css";
 
 export default class Controls extends Component {
   state = {
@@ -34,7 +35,7 @@ export default class Controls extends Component {
   render() {
     const { amount } = this.state;
     return (
-      <section class="controls">
+      <section className={styles.controls}>
         <input
           type="number"
           name="amount"
