@@ -1,5 +1,5 @@
-import React from "react";
-import styles from "./Balance.module.css";
+import React from 'react';
+import styles from './Balance.module.css';
 
 const Balance = ({ countCirculation, balance }) => (
   <section className={styles.balance}>
