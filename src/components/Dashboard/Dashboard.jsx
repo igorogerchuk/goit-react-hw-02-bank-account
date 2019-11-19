@@ -36,7 +36,6 @@ export default class Dashboard extends Component {
       amount,
       date: new Date().toLocaleString(),
     };
-    console.log(balance);
 
     this.setState(state => ({
       transactions: [...state.transactions, transaction],
@@ -45,7 +44,6 @@ export default class Dashboard extends Component {
           ? state.balance + amount
           : state.balance - amount,
     }));
-    console.log(balance);
   };
 
   countCirculation = () => {
